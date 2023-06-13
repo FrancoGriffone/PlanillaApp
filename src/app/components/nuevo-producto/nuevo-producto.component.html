@@ -1,0 +1,26 @@
+<form class="nuevoProductoForm mt-5" [formGroup]="profileForm" (ngSubmit)="onSubmit();">
+    <h2 class="mt-2">Nuevo producto</h2>
+    <div class="container card card-body mt-3">
+        <mat-form-field appearance="fill" class="spacingComponents">
+            <mat-label>Producto</mat-label>
+            <input matInput formControlName="prod" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="spacingComponents">
+            <mat-label>Nombre Genérico</mat-label>
+            <input matInput formControlName="nomGen" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="spacingComponents">
+            <mat-label>Vencimiento</mat-label>
+            <input matInput type="date" formControlName="vencimiento" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="spacingComponents">
+            <mat-label>Stock</mat-label>
+            <input matInput type="number" formControlName="stock" />
+        </mat-form-field>
+        <!-- ALERT DIV TIPO DE PRODUCTO -->
+        <div class="alert alert-danger" [hidden]="profileForm.valid">
+            Es necesario completar todos los campos para guardar un producto
+        </div>
+        <button class="btn btn-primary" [disabled]="profileForm.invalid">Nuevo producto</button>
+    </div>
+</form>

@@ -1,0 +1,40 @@
+<div class="container mt-5 contenedor">
+    <div>
+        <h1>Lista de productos</h1>
+    </div>
+    <div class="mt-3">
+        <ag-grid-angular
+    style="width: 1000px; height: 500px;"
+    class="ag-theme-alpine"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs">
+    </ag-grid-angular>
+    </div>
+    <div class="container card card-body mt-3 mb-2">
+        <!-- ALERT DIV EDITAR TRABAJO -->
+        <h3>Panel para editar un producto</h3>
+        <div class="alert alert-primary indicador">
+            Para editar un producto es necesario que en el espacio de abajo escribas su ID (están en la primera fila de la tabla a la izquierda del producto, se generan automáticamente cuando creas un nuevo trabajo) <strong>El primer botón es para editar el nombre, el segundo es para cambiar el vencimiento y el tercero para incorporar unidades al stock</strong>
+        </div>
+        <form [formGroup]="idForm" (ngSubmit)="idSubmit()">
+        <div class="formComponent">
+            <!-- FECHA -->
+            <mat-form-field appearance="outline" class="spacingComponents">
+                <mat-label>ID</mat-label>
+                <input matInput formControlName="id" />
+            </mat-form-field>
+        </div>
+        <div class="botones">
+            <button type="submit" class="btn btn-dark" [disabled]="idForm.invalid">
+                Editar nombre
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="idForm.invalid">
+                Modificar vencimiento
+            </button>
+            <button type="submit" class="btn btn-success" [disabled]="idForm.invalid">
+                Añadir stock
+            </button>
+        </div>
+    </form>
+    </div>
+</div>

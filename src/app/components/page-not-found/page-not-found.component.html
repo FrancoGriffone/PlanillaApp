@@ -1,0 +1,23 @@
+<form [formGroup]="profileForm">
+    <div formArrayName="producto">
+      <div *ngFor="let child of profileForm.get('producto')['controls']; let i = index" formGroupName="{{i}}">
+        <mat-form-field appearance="fill" class="spacingComponents">
+          <mat-label disabled>Tipo de producto</mat-label>
+          <mat-select formControlName="producto">
+              <mat-option value="tipoProducto">1</mat-option>
+          </mat-select>
+      </mat-form-field>
+        
+        <mat-form-field appearance="fill" class="spacingComponents">
+          <mat-label>Cantidad x producto</mat-label>
+          <input matInput formControlName="cantidadProducto" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="spacingComponents">
+          <mat-label>Cantidad de pasadas</mat-label>
+          <input matInput formControlName="cantidadPasadas" />
+      </mat-form-field>
+      <button class="btn btn-danger quitarProducto" (click)="removeProducto(i)">-</button>
+      </div>
+      <button class="btn btn-success masProductos spacingComponents" (click)="addProducto()">+</button>
+    </div>
+</form>

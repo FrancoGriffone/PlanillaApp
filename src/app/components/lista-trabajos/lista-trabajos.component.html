@@ -1,0 +1,102 @@
+<div class="container mt-5 contenedor">
+    <div class="nuevoTrabajo">
+        <!-- FORM NUEVO TRABAJO -->
+        <div class="container card card-body containerForm">
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                <h2>Agregar nuevo trabajo</h2>
+                <div class="formComponent">
+                    <!-- FECHA -->
+                    <mat-form-field appearance="fill" class="spacingComponents">
+                        <mat-label>Fecha</mat-label>
+                        <input matInput type="date" formControlName="fecha" />
+                    </mat-form-field>
+                </div>
+                <!-- ALERT DIV FECHA -->
+                <div class="alert alert-danger" [hidden]="profileForm.get('fecha')?.valid">
+                    Es necesario cargar la fecha del trabajo
+                </div>
+                <!-- CLIENTE ++ ALERT DIV -->
+                <div class="formComponent">
+                    <!-- CLIENTE -->
+                    <mat-form-field appearance="fill" class="spacingComponents">
+                        <mat-label>Cliente</mat-label>
+                        <input matInput formControlName="cliente" />
+                    </mat-form-field>
+                </div>
+                <!-- ALERT DIV CLIENTE -->
+                <div class="alert alert-danger" [hidden]="profileForm.get('cliente')?.valid">
+                    Es necesario cargar el nombre del cliente
+                </div>
+                <!-- TIPO DE PRODUCTO ++ ALERT DIV -->
+                <div formArrayName="producto">
+                    <div class="formComponent prodCantidades" *ngFor="let child of profileForm.get('producto')['controls']; let i = index" formGroupName="{{i}}">
+                        <!-- TIPO DE PRODUCTO -->
+                        <div class="producto">
+                            <mat-form-field appearance="fill" class="spacingComponents">
+                                <mat-label disabled>Tipo de producto</mat-label>
+                                <mat-select formControlName="producto">
+                                    <mat-option value="tipoProducto">1</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <button class="btn btn-danger quitarProducto" (click)="removeProducto(i)">-</button>
+                        </div>
+    
+                            <div class="cantidades">
+                                <!-- CANTIDADES -->
+                                <mat-form-field appearance="fill" class="spacingComponents">
+                                    <mat-label>Cantidad x producto</mat-label>
+                                    <input matInput formControlName="cantidadProducto" />
+                                </mat-form-field>
+                                <mat-form-field appearance="fill" class="spacingComponents">
+                                    <mat-label>Cantidad de pasadas</mat-label>
+                                    <input matInput formControlName="cantidadPasadas" />
+                                </mat-form-field>
+                            </div>
+                    </div>
+                </div>
+                <div class="masProductos mb-2">
+                    <button class="btn btn-success spacingComponents" (click)="addProducto()">Agregar producto</button>
+                </div>
+                <!-- ALERT DIV TIPO DE PRODUCTO -->
+                <div class="alert alert-danger" [hidden]="profileForm.get('cliente')?.invalid">
+                    Es necesario elegir al menos un producto junto con la cantidad y las pasadas para grabar el trabajo
+                </div>
+                <!-- BOTONES DE GRABAR Y NUEVO -->
+                <div class="formComponent">
+                    <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">
+                        Grabar
+                    </button>
+                    <button type="reset" class="btn btn-danger">Nuevo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="grid-container mt-4">
+        <ag-grid-angular 
+            style="width: 1000px; height: 500px;" 
+            class="ag-theme-alpine" 
+            [rowData]="rowData"
+            [columnDefs]="columnDefs">
+        </ag-grid-angular>
+    </div>
+    <div class="container card card-body mt-3 mb-2">
+        <!-- ALERT DIV EDITAR TRABAJO -->
+        <h3>Editar un trabajo</h3>
+        <div class="alert alert-primary">
+            Para editar un trabajo es necesario que en el espacio de abajo escribas su ID (están en la primera fila de la tabla a la izquierda del cliente, se generan automáticamente cuando creas un nuevo trabajo)
+        </div>
+        <form [formGroup]="idForm" (ngSubmit)="idSubmit()">
+        <div class="formComponent">
+            <!-- FECHA -->
+            <mat-form-field appearance="outline" class="spacingComponents">
+                <mat-label>ID</mat-label>
+                <input matInput formControlName="id" />
+            </mat-form-field>
+        </div>
+        <!-- TIENE STYLE PROPIO EN EL HTML ESTE BOTON -->
+        <button type="submit" style="width: 100%;" class="btn btn-primary" [disabled]="idForm.invalid">
+            Editar un trabajo
+        </button>
+    </form>
+    </div>
+</div>

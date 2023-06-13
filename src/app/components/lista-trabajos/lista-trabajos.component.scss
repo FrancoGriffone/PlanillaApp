@@ -1,0 +1,39 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    .formComponent {
+        display: flex;
+        justify-content: space-around;
+        .quitarProducto {
+            width: 55px;
+            height: 55px;
+        }
+        mat-form-field {
+          width: 100%;
+        }
+        .spacingComponents {
+          margin-right: 2%;
+        }
+    }
+    .grid-container {
+        display: flex;
+        justify-content: center;
+    }
+}
+.prodCantidades {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .producto {
+        display: flex;
+
+    }
+    .cantidades {
+        display: flex;
+        justify-content: center;
+    }
+}
+.masProductos {
+    display: flex;
+    justify-content: center;
+}

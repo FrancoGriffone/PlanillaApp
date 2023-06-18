@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 //AG Grid
 import { AgGridModule } from 'ag-grid-angular';
 //Angular Forms
@@ -14,8 +15,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//Components
 import { AppRoutingModule } from './app-routing.module';
+//Components
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ListaTrabajosComponent } from './components/lista-trabajos/lista-trabajos.component';
@@ -47,6 +48,7 @@ import { NuevoProductoComponent } from './components/nuevo-producto/nuevo-produc
     MatNativeDateModule,
     MatCardModule,
     MatTableModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

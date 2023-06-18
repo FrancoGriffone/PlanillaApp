@@ -1,5 +1,5 @@
-<form class="nuevoProductoForm mt-5" [formGroup]="profileForm" (ngSubmit)="onSubmit();">
-    <h2 class="mt-2">Nuevo producto</h2>
+<form class="nuevoProductoForm mt-5" [formGroup]="profileForm" (ngSubmit)="agregarProducto()">
+    <h2 class="mt-2">{{titulo}}</h2>
     <div class="container card card-body mt-3">
         <mat-form-field appearance="fill" class="spacingComponents">
             <mat-label>Producto</mat-label>
@@ -21,6 +21,6 @@
         <div class="alert alert-danger" [hidden]="profileForm.valid">
             Es necesario completar todos los campos para guardar un producto
         </div>
-        <button class="btn btn-primary" [disabled]="profileForm.invalid">Nuevo producto</button>
+        <button class="btn btn-primary" type="submit" [disabled]="profileForm.invalid">Nuevo producto</button>
     </div>
 </form>

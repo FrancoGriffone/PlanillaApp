@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ProductoService } from 'src/app/service/producto.service';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-productos',
@@ -9,26 +13,47 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class ListaProductosComponent {
 
+  rowData$!: Observable<any[]>
+
+  // datos = [] 
+
+  // obtenerProductos(){
+  //   this.productoService.getProductos().subscribe(data =>{
+  //     console.log(data)
+  //     this.datos = data
+  //   }), error => {
+  //     console.log(error)
+  //   }
+  // }
+
   columnDefs: ColDef[] = [
-    { field: 'make', headerName: "Producto", width: 150, sortable: true},
-    { field: 'model', headerName: "Nombre Generico", width:200},
-    { field: 'price', headerName: "Vencimiento", width:150, sortable: true},
-    { field: 'price', headerName: "Consumos", width:100},
-    { field: 'price', headerName: "Stock", width:100, sortable: true},
+    { field: 'producto', headerName: "Producto", width: 150, sortable: true, resizable: true},
+    { field: 'nombreGenerico', headerName: "Nombre Generico", width:200, resizable: true},
+    { field: 'vencimiento', headerName: "Vencimiento", width:150, sortable: true, resizable: true},
+    { field: 'consumos', headerName: "Consumos", width:100, resizable: true},
+    { field: 'stock', headerName: "Stock", width:100, sortable: true, resizable: true},
 ];
 
-rowData = [
-    { make: 'Toyota', model: 'Celica', price: 35000 },
-    { make: 'Ford', model: 'Mondeo', price: 32000 },
-    { make: 'Porsche', model: 'Boxster', price: 72000 }
-];
 idForm = new FormGroup({
   id: new FormControl('', Validators.required),
 });
-
+id:string = this.idForm.value.id
 
 idSubmit() {
-  // TODO: Use EventEmitter with form value
-  console.log(this.idForm.value);
+  this.router.navigate(["editarProducto/", this.idForm.value.id])
 }
+
+constructor(private productoService: ProductoService, private http: HttpClient, private router: Router){}
+
+  ngOnInit(): void {
+    this.rowData$ = this.http.get<any[]>('http://localhost:4000/api/productos')
+  }
+
+  eliminarProducto(id: any){
+    this.productoService.eliminarProducto(this.idForm.value.id).subscribe(data => {
+      console.log(data)
+      alert('El producto fue eliminado correctamente!')
+      this.idForm.reset()
+    })
+  }
 }

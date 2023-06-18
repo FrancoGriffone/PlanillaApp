@@ -6,7 +6,7 @@
         <ag-grid-angular
     style="width: 1000px; height: 500px;"
     class="ag-theme-alpine"
-    [rowData]="rowData"
+    [rowData]="rowData$ | async"
     [columnDefs]="columnDefs">
     </ag-grid-angular>
     </div>
@@ -25,14 +25,11 @@
             </mat-form-field>
         </div>
         <div class="botones">
-            <button type="submit" class="btn btn-dark" [disabled]="idForm.invalid">
-                Editar nombre
+            <button type="submit" class="btn btn-primary" (click)="idSubmit()" [disabled]="idForm.invalid">
+                Editar producto
             </button>
-            <button type="submit" class="btn btn-primary" [disabled]="idForm.invalid">
-                Modificar vencimiento
-            </button>
-            <button type="submit" class="btn btn-success" [disabled]="idForm.invalid">
-                Añadir stock
+            <button type="submit" class="btn btn-danger" (click)="eliminarProducto(id)" [disabled]="idForm.invalid">
+                Borrar producto
             </button>
         </div>
     </form>

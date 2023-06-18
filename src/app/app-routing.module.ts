@@ -24,6 +24,10 @@ const routes: Routes = [
     component: NuevoProductoComponent
   },
   {
+    path: 'editarProducto/:id',
+    component: NuevoProductoComponent
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }

@@ -46,7 +46,7 @@ idSubmit() {
 constructor(private productoService: ProductoService, private http: HttpClient, private router: Router){}
 
   ngOnInit(): void {
-    this.rowData$ = this.http.get<any[]>('http://localhost:4000/api/productos')
+    this.rowData$ = this.http.get<any[]>('https://planillaapp.onrender.com/api/productos')
   }
 
   eliminarProducto(id: any){
